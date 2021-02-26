@@ -11,7 +11,7 @@ const port = 8000
 app.use(helmet.hidePoweredBy())
 
 
-mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(process.env.DB_URL, { useUnifiedTopology: true, useNewUrlParser: true })
 const db = mongoose.connection
 db.on('error', (error) => console.log(error))
 db.once('open', () => console.log('Connected to DB'))
@@ -20,15 +20,9 @@ db.once('open', () => console.log('Connected to DB'))
 app.use(express.json())
 
 // Router
-const flightRouter = require('./routes/flights')
-app.use('/flights', flightRouter)
-
-
-// Example route
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const Router = require('./routes/router')
+app.use('/main', Router)
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`SMI API STARTED AT http://localhost:${port}`)
 })
