@@ -83,7 +83,7 @@ router.post('/signup', async (req, res) => {
                             }
                         });
                         var mailOptions = {
-                            from: 'SLS AVIATION AUTHENTICATION',
+                            from: 'SMI AUTHENTICATION SERVICE',
                             to: req.body.email,
                             subject: 'AUTH SERVICE',
                             html: `<a href=http://localhost:8000/main/verify/${verifyCode}>Click to verify</a>`
@@ -126,7 +126,7 @@ router.get('/verify/:token', async (req, res) => {
                     // Update record with _id
                     internalU.active = true
                     const updatedUser = await internalU.save()
-                    res.redirect('http://localhost:3000/')
+                    res.redirect('http://localhost:3000/verify')
                 } catch (err) {
                     res.status(400).json({ message: err.message })
                 }
